@@ -1,46 +1,36 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/st7796_match3/README.md b/st7796_match3/README.md
-new file mode 100644
-index 0000000000000000000000000000000000000000..09c738713aeab6d909e62138587159daa4bd0688
---- /dev/null
-+++ b/st7796_match3/README.md
-@@ -0,0 +1,36 @@
-+# STM32F407VGT6 + ST7796(i8080 16位) + FT6336U 消消乐
-+
-+本版本已改为**基于你提供的测试程序同款底层驱动**实现：
-+
-+- LCD：GPIO bit-bang i8080 16-bit（不依赖 Arduino_GFX）
-+- Touch：FT6336U I2C 读取
-+- Game：8x8 消消乐（交换、消除、下落、连消、自动洗牌）
-+
-+## 1. 使用步骤
-+
-+1. 打开 `st7796_match3.ino`
-+2. 按实际硬件连接修改顶部引脚（`LCD_D[]`、`PIN_LCD_*`、`PIN_TP_*`）
-+3. Arduino IDE 选择 STM32F407VGT6 对应板卡
-+4. 上传运行
-+
-+## 2. 依赖
-+
-+- `Wire`（Arduino 内置）
-+
-+> 本工程未使用 `Arduino_GFX`，避免与测试代码行为差异。
-+
-+## 3. 触控方向
-+
-+若触摸位置偏移或旋转不对，请改：
-+
-+- `touchToScreen(rawX, rawY, sx, sy)`
-+
-+当前默认是与你测试程序一致的“直通映射”。
-+
-+## 4. 游戏规则
-+
-+- 第一次点击：选中一个格子
-+- 第二次点击：选中相邻格子并交换
-+- 形成 3 连或以上即消除并下落补齐
-+- 连续消除会继续累计分数
-+- 无可走步时会自动洗牌
- 
-EOF
-)
+# STM32F407VGT6 + ST7796(i8080 16位) + FT6336U 消消乐
+
+本版本已改为**基于你提供的测试程序同款底层驱动**实现：
+
+- LCD：GPIO bit-bang i8080 16-bit（不依赖 Arduino_GFX）
+- Touch：FT6336U I2C 读取
+- Game：8x8 消消乐（交换、消除、下落、连消、自动洗牌）
+
+## 1. 使用步骤
+
+1. 打开 `st7796_match3.ino`
+2. 按实际硬件连接修改顶部引脚（`LCD_D[]`、`PIN_LCD_*`、`PIN_TP_*`）
+3. Arduino IDE 选择 STM32F407VGT6 对应板卡
+4. 上传运行
+
+## 2. 依赖
+
+- `Wire`（Arduino 内置）
+
+> 本工程未使用 `Arduino_GFX`，避免与测试代码行为差异。
+
+## 3. 触控方向
+
+若触摸位置偏移或旋转不对，请改：
+
+- `touchToScreen(rawX, rawY, sx, sy)`
+
+当前默认是与你测试程序一致的“直通映射”。
+
+## 4. 游戏规则
+
+- 第一次点击：选中一个格子
+- 第二次点击：选中相邻格子并交换
+- 形成 3 连或以上即消除并下落补齐
+- 连续消除会继续累计分数
+- 无可走步时会自动洗牌
